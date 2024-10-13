@@ -3,6 +3,8 @@ using E_CommerceAPI.Helper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Store.DAL.Contexts;
+using Store.Repository.Interfaces;
+using Store.Repository.UnitofWork;
 
 namespace E_CommerceAPI
 {
@@ -21,10 +23,9 @@ namespace E_CommerceAPI
             builder.Services.AddDbContext<StoreDbcontext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-
-
-
             });
+
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             var app = builder.Build();
 
