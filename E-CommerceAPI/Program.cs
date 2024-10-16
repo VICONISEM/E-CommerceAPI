@@ -36,7 +36,7 @@ namespace E_CommerceAPI
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection() ;
+            app.UseHttpsRedirection();
 
             app.UseAuthorization();
             await ApplaySeedingAsync.ApplaySeeding(app);
