@@ -10,7 +10,7 @@ namespace Store.Service.Services.Products.Interfaces
 {
     public interface IProductService
     {
-        public Task<ProductDto> GetByIdAsync(int Id);
+        public Task<ProductDto> GetByIdAsync(int ?Id);
 
         public Task<IEnumerable<ProductDto>> GetAllProductsAsync();
         public Task<IEnumerable<BrandTypeDTOs>> GetAllBrandsAsync();
