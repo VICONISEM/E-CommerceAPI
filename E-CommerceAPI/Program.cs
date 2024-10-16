@@ -1,9 +1,16 @@
 
+using E_CommerceAPI.Helper;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Store.DAL.Contexts;
+using Store.Repository.Interfaces;
+using Store.Repository.UnitofWork;
+
 namespace E_CommerceAPI
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task  Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +20,12 @@ namespace E_CommerceAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddDbContext<StoreDbcontext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
+
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             var app = builder.Build();
 
@@ -26,7 +39,7 @@ namespace E_CommerceAPI
             app.UseHttpsRedirection() ;
 
             app.UseAuthorization();
-
+            await ApplaySeedingAsync.ApplaySeeding(app);
 
             app.MapControllers();
 
