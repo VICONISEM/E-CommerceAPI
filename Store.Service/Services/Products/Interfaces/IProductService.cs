@@ -1,4 +1,5 @@
-﻿using Store.Service.Services.Products.DTOs;
+﻿using Store.Repository.Specifications.product;
+using Store.Service.Services.Products.DTOs;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace Store.Service.Services.Products.Interfaces
         public Task<IEnumerable<ProductDto>> GetAllProductsAsync();
         public Task<IEnumerable<BrandTypeDTOs>> GetAllBrandsAsync();
         public Task<IEnumerable<BrandTypeDTOs>> GetAllTypesAsync();
+        public Task<IEnumerable<ProductDto>> GetAllProductsAsync(ProductSpecification input);
 
 
 

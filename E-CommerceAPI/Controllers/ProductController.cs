@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Store.Repository.Specifications.product;
 using Store.Service.Services.Products.DTOs;
 using Store.Service.Services.Products.Interfaces;
 
@@ -31,9 +32,9 @@ namespace E_CommerceAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<ProductDto>>> GetAllProducts()
+        public async Task<ActionResult<IReadOnlyList<ProductDto>>> GetAllProducts([FromQuery]ProductSpecification input)
         {
-            var Products = await _productService.GetAllProductsAsync();
+            var Products = await _productService.GetAllProductsAsync(input);
             return Ok(Products);
 
         }

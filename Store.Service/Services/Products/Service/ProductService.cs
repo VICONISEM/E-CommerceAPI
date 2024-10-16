@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Store.DAL.Entities;
 using Store.Repository.Interfaces;
+using Store.Repository.Specifications.product;
 using Store.Service.Services.Products.DTOs;
 using Store.Service.Services.Products.Interfaces;
 using System;
@@ -32,9 +33,10 @@ namespace Store.Service.Services.Products.Service
            
         }
 
-        public async Task<IEnumerable<ProductDto>> GetAllProductsAsync()
+        public async Task<IEnumerable<ProductDto>> GetAllProductsAsync(ProductSpecification input)
         {
-            var products=await _unitOfWork.Repository<Product,int>().GetAllAsync();
+            var specs = new ProductWithSpecification(input);
+            var products=await _unitOfWork.Repository<Product,int>().GetAllWithSpecificationAsync(specs);
 
             IReadOnlyList<ProductDto> MaapedProducts = _mapper.Map<IReadOnlyList<ProductDto>>(products);
 
@@ -43,6 +45,19 @@ namespace Store.Service.Services.Products.Service
 
             
         }
+        public async Task<IEnumerable<ProductDto>> GetAllProductsAsync()
+        {
+            
+            var products = await _unitOfWork.Repository<Product, int>().GetAllAsync();
+
+            IReadOnlyList<ProductDto> MaapedProducts = _mapper.Map<IReadOnlyList<ProductDto>>(products);
+
+            return MaapedProducts;
+
+
+
+        }
+
 
         public async Task<IEnumerable<BrandTypeDTOs>> GetAllTypesAsync()
         {
