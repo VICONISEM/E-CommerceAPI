@@ -13,10 +13,9 @@ namespace Store.Service.Services.Products.Interfaces
     {
         public Task<ProductDto> GetByIdAsync(int ?Id);
 
-        public Task<IEnumerable<ProductDto>> GetAllProductsAsync();
+        public Task<PaginatedResultDto<ProductDto>>GetAllProductsAsync(ProductSpecification specs);
         public Task<IEnumerable<BrandTypeDTOs>> GetAllBrandsAsync();
         public Task<IEnumerable<BrandTypeDTOs>> GetAllTypesAsync();
-        public Task<IEnumerable<ProductDto>> GetAllProductsAsync(ProductSpecification input);
 
 
 
