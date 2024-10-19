@@ -25,6 +25,14 @@ namespace Store.Repository.Specifications.product
 
 
         }
+        private string? _Search;
+
+        public string? Search
+        {
+            get => _Search;
+            set => _Search = value?.Trim().ToLower();
+        }
+
 
     }
 }

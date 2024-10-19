@@ -11,7 +11,8 @@ namespace Store.Repository.Specifications.product
     {
         public ProductWithSpecification(ProductSpecification specification):
             base(prod=>(!specification.BrandId.HasValue||prod.ProductBrandId==specification.BrandId.Value)&&
-            (!specification.TypeId.HasValue||prod.ProductTypeId==specification.TypeId.Value))
+            (!specification.TypeId.HasValue||prod.ProductTypeId==specification.TypeId.Value)&&
+            (string.IsNullOrEmpty(specification.Search)||prod.Name.Trim().ToLower().Contains(specification.Search)))            
             
             
         {
