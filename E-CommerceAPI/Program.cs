@@ -22,6 +22,7 @@ namespace E_CommerceAPI
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
+
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<StoreDbcontext>(options =>
             {
@@ -32,6 +33,9 @@ namespace E_CommerceAPI
             builder.Services.AddAutoMapper(typeof(ProductProfile));
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddHttpContextAccessor();
+
+            builder.Services.AddSwaggerGen();
+
 
             var app = builder.Build();
 
