@@ -50,6 +50,8 @@ namespace E_CommerceAPI
 
             app.UseAuthorization();
             app.UseStaticFiles();
+
+
             await ApplaySeedingAsync.ApplaySeeding(app);
 
             app.MapControllers();
