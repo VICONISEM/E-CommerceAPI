@@ -11,12 +11,39 @@ namespace Store.Repository.Specifications.product
     {
         public ProductWithSpecification(ProductSpecification specification):
             base(prod=>(!specification.BrandId.HasValue||prod.ProductBrandId==specification.BrandId.Value)&&
-            (!specification.TypeId.HasValue||prod.ProductTypeId==specification.TypeId.Value))
+            (!specification.TypeId.HasValue||prod.ProductTypeId==specification.TypeId.Value)&&
+            (string.IsNullOrEmpty(specification.Search)||prod.Name.Trim().ToLower().Contains(specification.Search)))            
             
             
         {
             AddInclude(x => x.ProductType);
             AddInclude(y => y.ProductBrand);
+            AddOrderByAsc(z => z.Name);
+            ApplayPagination(specification._PageSize * (specification.pageIndex - 1), specification._PageSize);
+            if(!string.IsNullOrEmpty(specification.Sort))
+            {
+                switch (specification.Sort)
+                {
+                    case "PriceAsc":
+                      AddOrderByAsc(x => x.Price);
+                        break;
+
+                    case "PriceDesc":
+                        AddOrderByDesc(x => x.Price);
+                        break;
+
+                    default:
+                        AddOrderByAsc(z => z.Name);
+                        break;
+                };
+            }
         }
+
+        public ProductWithSpecification(int ?Id) :base(p=>p.Id==Id)
+        {
+            AddInclude(x => x.ProductBrand);
+            AddInclude(y => y.ProductType);
+        }
+         
     }
 }

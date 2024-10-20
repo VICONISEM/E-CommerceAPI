@@ -23,7 +23,10 @@ namespace Store.Repository.Interfaces
 
         public void Update(Entity entity);
 
+        public Task<int> GetCountWithspecs(ISpecification<Entity> specs);
 
-        
+
+
+
     }
 }

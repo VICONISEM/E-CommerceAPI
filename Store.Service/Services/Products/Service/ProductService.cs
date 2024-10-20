@@ -33,14 +33,18 @@ namespace Store.Service.Services.Products.Service
            
         }
 
-        public async Task<IEnumerable<ProductDto>> GetAllProductsAsync(ProductSpecification input)
+        public async Task<PaginatedResultDto<ProductDto>> GetAllProductsAsync(ProductSpecification input)
         {
             var specs = new ProductWithSpecification(input);
             var products=await _unitOfWork.Repository<Product,int>().GetAllWithSpecificationAsync(specs);
 
             IReadOnlyList<ProductDto> MaapedProducts = _mapper.Map<IReadOnlyList<ProductDto>>(products);
 
-            return MaapedProducts;
+            var countSpecs=new ProductWithCountSpecification(input);
+            var count=await _unitOfWork.Repository<Product, int>().GetCountWithspecs(countSpecs);
+
+
+            return new PaginatedResultDto<ProductDto>(input.pageIndex,input._PageSize, count, MaapedProducts) {};
 
 
             
@@ -58,7 +62,7 @@ namespace Store.Service.Services.Products.Service
 
         }
 
-
+       
         public async Task<IEnumerable<BrandTypeDTOs>> GetAllTypesAsync()
         {
             var Types = await _unitOfWork.Repository<ProductType, int>().GetAllAsync();
@@ -68,9 +72,12 @@ namespace Store.Service.Services.Products.Service
 
         public async Task<ProductDto> GetByIdAsync(int? Id)
         {
-           var Product=await _unitOfWork.Repository<Product,int>().GetByIdAsync(Id.Value);
+            var specs=new ProductWithSpecification(Id);
+            var Product = await _unitOfWork.Repository<Product, int>().GetByIdWithSpecificationAsync(specs);
             return _mapper.Map<ProductDto>(Product);
 
         }
+
+     
     }
 }
