@@ -38,7 +38,7 @@ namespace E_CommerceAPI
             //builder.Services.AddHttpContextAccessor();
 
             //builder.Services.AddSwaggerGen();
-            builder.Services.ApplicationService();
+            builder.Services.ApplicationService() ;
 
 
             var app = builder.Build();
