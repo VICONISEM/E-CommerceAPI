@@ -26,7 +26,7 @@ namespace E_CommerceAPI.MiddelWare
             catch (Exception ex)
             {
                 logger.LogError(ex, ex.Message);
-                context.Response.ContentType = "application/json";
+                context.Response.ContentType = "Application/json";
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 var ResponseEnv = environment.IsDevelopment()?new CostumException(500,ex.Message,ex.StackTrace.ToString()):new CostumException((int)HttpStatusCode.InternalServerError);
 
