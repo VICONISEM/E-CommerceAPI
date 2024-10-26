@@ -1,0 +1,34 @@
+[
+  {
+    "Name": "iPhone 14",
+    "Description": "Latest Apple smartphone with A15 Bionic chip",
+    "ImageUrl": "https://example.com/images/iphone14.jpg",
+    "price": 999.99,
+    "ProductTypeId": 37,
+    "ProductBrandId": 40
+  },
+  {
+    "Name": "Samsung Galaxy S23",
+    "Description": "Flagship Android phone with Snapdragon 8 Gen 1",
+    "ImageUrl": "https://example.com/images/galaxys23.jpg",
+    "price": 899.99,
+    "ProductTypeId": 38,
+    "ProductBrandId": 41
+  },
+  {
+    "Name": "Sony Bravia 65-inch OLED",
+    "Description": "Ultra HD Smart TV with HDR and Dolby Vision",
+    "ImageUrl": "https://example.com/images/sonybravia.jpg",
+    "price": 1499.99,
+    "ProductTypeId": 39,
+    "ProductBrandId": 42
+  },
+  {
+    "Name": "Nike Air Max",
+    "Description": "Comfortable and stylish running shoes",
+    "ImageUrl": "https://example.com/images/nikeairmax.jpg",
+    "price": 199.99,
+    "ProductTypeId": 40,
+    "ProductBrandId": 43
+  }
+]
