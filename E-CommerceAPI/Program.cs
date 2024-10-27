@@ -4,6 +4,7 @@ using E_CommerceAPI.Helper;
 using E_CommerceAPI.MiddelWare;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using StackExchange.Redis;
 using Store.DAL.Contexts;
 using Store.Repository.Interfaces;
 using Store.Repository.UnitofWork;
@@ -38,6 +39,13 @@ namespace E_CommerceAPI
             //builder.Services.AddHttpContextAccessor();
 
             //builder.Services.AddSwaggerGen();
+          builder.Services.AddSingleton<IConnectionMultiplexer>(config =>
+            {
+                var configration = ConfigurationOptions.Parse(builder.Configuration.GetConnectionString("Redis"));
+
+                return ConnectionMultiplexer.Connect(configration);
+
+            });
             builder.Services.ApplicationService();
 
 
