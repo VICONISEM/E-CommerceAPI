@@ -13,7 +13,7 @@ namespace Store.DAL.Entities.IdentityEntity
     {
         public string DisplayName { get; set; }
 
-        public Address address { get; set; }
+        public List<Address> address { get; set; }
 
 
     }
