@@ -1,4 +1,6 @@
-﻿using Store.DAL.Contexts;
+﻿using Microsoft.AspNetCore.Identity;
+using Store.DAL.Contexts;
+using Store.DAL.Entities.IdentityEntity;
 
 namespace E_CommerceAPI.Helper
 {
@@ -13,8 +15,10 @@ namespace E_CommerceAPI.Helper
                 var loggerfactory=service.GetRequiredService<ILoggerFactory>();
                 try
                 {
+                    var UserSeeding = service.GetRequiredService<UserManager<ApplicationUser>>();
                     var context = service.GetRequiredService<StoreDbcontext>();
                     await StoreDbContextSeed.SeedAsync(context, loggerfactory);
+                    await SeedingIdentity.SeedUserAsync(UserSeeding);
                 }
                 catch (Exception ex) { }
             }

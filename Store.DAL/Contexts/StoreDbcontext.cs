@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Store.DAL.Contexts
 {
-    public class StoreDbcontext:DbContext
+    public class StoreDbcontext : DbContext
     {
 
         public DbSet<Product> Products { get; set; }
@@ -18,6 +18,7 @@ namespace Store.DAL.Contexts
         public DbSet<ProductType> ProductTypes { get; set; }
 
         public DbSet<ProductBrand> ProductBrands { get; set; }
+        public DbSet<DeliveryMethod> DeliveryMethods { get; set; }
 
 
         public StoreDbcontext(DbContextOptions<StoreDbcontext> options) : base(options) { }
@@ -33,7 +34,7 @@ namespace Store.DAL.Contexts
             base.OnModelCreating(modelBuilder);
         }
 
-       
+
 
 
     }
