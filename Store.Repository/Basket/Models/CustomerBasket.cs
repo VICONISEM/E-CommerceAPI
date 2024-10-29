@@ -8,7 +8,7 @@ namespace Store.Repository.Basket.Models
 {
     public class CustomerBasket
     {
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         public int? DeleveryMethosId { get; set; }
 
