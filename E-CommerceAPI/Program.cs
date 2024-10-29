@@ -33,6 +33,16 @@ namespace E_CommerceAPI
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
 
+
+            builder.Services.AddDbContext<IdentityDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityCS"));
+
+
+
+
+            });
+
             //builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             //builder.Services.AddAutoMapper(typeof(ProductProfile));
             //builder.Services.AddScoped<IProductService, ProductService>();
@@ -47,6 +57,7 @@ namespace E_CommerceAPI
 
             });
             builder.Services.ApplicationService();
+            builder.Services.ApplayIdentityServices();
 
 
             var app = builder.Build();
