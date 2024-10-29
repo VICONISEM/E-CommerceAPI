@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Store.Service.Services.Basket.Service
 {
-    public class BasketService:IBasketService
+    public class BasketService : IBasketService
     {
         private readonly IMapper _mapper;
         private readonly IBasketRepository _repository;
@@ -23,23 +23,23 @@ namespace Store.Service.Services.Basket.Service
         }
 
         public async Task<bool> DeleteBasketAsync(string BasketId)
-       =>await _repository.DeleteBasketAsync(BasketId);
+       => await _repository.DeleteBasketAsync(BasketId);
 
         public async Task<CustomerBasketDTO> GetBasketAsync(string Id)
         {
-            var Basket =await _repository.GetBasketAsync(Id);
-            if(Basket is not null)
+            var Basket = await _repository.GetBasketAsync(Id);
+            if (Basket is not null)
             {
                 var MappedBasket = _mapper.Map<CustomerBasketDTO>(Basket);
                 return MappedBasket;
 
-            }    
+            }
             else
             {
                 return new CustomerBasketDTO();
             }
         }
-       
+
 
         public async Task<CustomerBasketDTO> UpdateBasketAsync(CustomerBasketDTO customerBasket)
         {
@@ -59,5 +59,6 @@ namespace Store.Service.Services.Basket.Service
             Random random = new Random();
             int RandDigit = random.Next(1000, 10000);
             return $"Bs-{RandDigit}";
+        }
     }
 }

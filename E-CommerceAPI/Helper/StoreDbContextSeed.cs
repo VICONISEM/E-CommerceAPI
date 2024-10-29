@@ -55,6 +55,17 @@ namespace E_CommerceAPI.Helper
                 }
 
 
+                if (storeDbcontext.DeliveryMethods != null && !storeDbcontext.DeliveryMethods.Any())
+                {
+                    var DeliveryData = File.ReadAllText("D:\\ASP.NET\\ROUTE\\02 C#\\C_Sharp_route_assingment\\E-CommerceAPI\\E-CommerceAPI\\Helper\\DataSeed\\delivery.json");
+                    var DeliveryObject = JsonSerializer.Deserialize<List<DeliveryMethod>>(DeliveryData);
+                    if (DeliveryObject is not null)
+                    {
+                        await storeDbcontext.DeliveryMethods.AddRangeAsync(DeliveryObject);
+                    }
+                }
+
+
                 await storeDbcontext.SaveChangesAsync();
 
             
